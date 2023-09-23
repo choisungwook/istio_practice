@@ -36,3 +36,11 @@ istioctl install --set profile=demo -y
 ```bash
 kubectl label namespace default istio-injection=enabled
 ```
+
+* istio-ingress gateway service port를 kind cluster환경에 맞게 변경
+```bash
+kubectl patch deployments.apps -n istio-system istio-ingressgateway -p '{"spec":{"template":{"spec":{"containers":[{"name":"istio-proxy","ports":[{"containerPort":8080,"hostPort":80},{"containerPort":8443,"hostPort":443}]}]}}}}'
+```
+
+# 참고자료
+* kind cluster에서 istio 설치: https://medium.com/@s4l1h/how-to-install-kind-and-istio-ingress-controller-3b510834c762
