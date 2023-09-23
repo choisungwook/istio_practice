@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: istio-example1-nginx
+spec:
+  selector:
+    matchLabels:
+      app: istio-example1-nginx
+  template:
+    metadata:
+      labels:
+        app: istio-example1-nginx
+    spec:
+      containers:
+      - name: istio-example1-nginx
+        image: nginx
+        resources:
+          limits:
+            memory: "64Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80

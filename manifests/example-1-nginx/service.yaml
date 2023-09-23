@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: istio-example1-nginx
+spec:
+  selector:
+    app: istio-example1-nginx
+  ports:
+  - port: 80
+    targetPort: 80
