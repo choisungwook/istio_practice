@@ -12,3 +12,16 @@ make up
 ```bash
 make down
 ```
+
+# istio 설치
+* istioctl 설치
+```bash
+# 다운로드
+curl -L https://istio.io/downloadIstio | sh -
+
+# istioctl 바이너리를 path경로로 복사
+udo cp ./istio-1.19.0/bin/istioctl /usr/local/bin
+
+# 설치 확인
+istioctl x precheck
+```
