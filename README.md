@@ -24,7 +24,7 @@ istioctl x precheck
 * makefile 스크립트를 이용해서 환경 삭제
   * 스크립트 실행내용: kind cluster 삭제
 ```bash
-make delete
+make uninstall
 ```
 
 # 3. istio 컴퍼넌트 설치

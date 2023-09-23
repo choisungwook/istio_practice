@@ -1,5 +1,5 @@
 install: install-kind-command create-kind-cluster install-istioctl
-delete:
+uninstall:
 	@cd kind_cluster && kind delete cluster --name istio-practice
 
 install-kind-command:
