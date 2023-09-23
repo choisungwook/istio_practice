@@ -30,7 +30,8 @@ make delete
 # 3. istio 컴퍼넌트 설치
 * istioctl로 컴퍼넌트 설치
 ```bash
-istioctl install --set profile=demo -y
+istioctl install --set profile=demo -f manifests/istio-config.yaml -y
+kubectl -n istio-system get po,svc
 ```
 
 * default namespace에 istio inject 설정
@@ -38,11 +39,26 @@ istioctl install --set profile=demo -y
 kubectl label namespace default istio-injection=enabled
 ```
 
-* istio-ingress gateway service port를 kind cluster환경에 맞게 변경
+# 4. istio 샘플 애플리케이션 배포
 ```bash
-kubectl patch deployments.apps -n istio-system istio-ingressgateway -p '{"spec":{"template":{"spec":{"containers":[{"name":"istio-proxy","ports":[{"containerPort":8080,"hostPort":80},{"containerPort":8443,"hostPort":443}]}]}}}}'
+cd istio-x.x.x
+
+# 애플리케이션 배포
+kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+
+# gateway 설정 배포
+kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+
+# 접속
+# reference: https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/#using-node-ports-of-the-ingress-gateway-service
+export GATEWAY_URL="127.0.0.1:80"
+curl -s "http://${GATEWAY_URL}/productpage" | grep -o "<title>.*</title>"
 ```
+
+![](./imgs/istio_application_curl.png)
 
 
 # 참고자료
 * kind cluster에서 istio 설치: https://medium.com/@s4l1h/how-to-install-kind-and-istio-ingress-controller-3b510834c762
+* istio nodeport: https://github.com/kubernetes-sigs/kind/issues/2374
+* istio nodeport: https://itnp.kr/post/install-istio
