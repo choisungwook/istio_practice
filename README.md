@@ -13,7 +13,7 @@ make up
 make down
 ```
 
-# istio 설치
+# istioctl 설치
 * istioctl 설치
 ```bash
 # 다운로드
@@ -24,4 +24,15 @@ udo cp ./istio-1.19.0/bin/istioctl /usr/local/bin
 
 # 설치 확인
 istioctl x precheck
+```
+
+# istio 컴퍼넌트 설치
+* istioctl로 컴퍼넌트 설치
+```bash
+istioctl install --set profile=demo -y
+```
+
+* default namespace에 istio inject 설정
+```bash
+kubectl label namespace default istio-injection=enabled
 ```
