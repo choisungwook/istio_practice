@@ -19,6 +19,10 @@ create-kind-cluster:
 install-istioctl:
 	@curl -sL https://istio.io/downloadIstio | sh -
 
+install-istio-components:
+	@istioctl install --set profile=demo -f manifests/istio-config.yaml -y
+	@kubectl label namespace default istio-injection=enabled
+
 define install_kind_linux
 	@echo "[*] kind 명령어를 설치 중입니다..."
 	@curl -Lo ./kind -sLo ./kind https://kind.sigs.k8s.io/dl/v0.20.0/kind-linux-amd64
