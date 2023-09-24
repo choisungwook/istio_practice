@@ -57,6 +57,13 @@ curl -s "http://${GATEWAY_URL}/productpage" | grep -o "<title>.*</title>"
 
 ![](./imgs/istio_application_curl.png)
 
+# 5. 모니터링
+* istio addons를 설치하여 메트릭 등을 모니터링
+
+```bash
+cd istio-x.x.x
+kubectl apply -f samples/addons/
+```
 
 # 참고자료
 * kind cluster에서 istio 설치: https://medium.com/@s4l1h/how-to-install-kind-and-istio-ingress-controller-3b510834c762
