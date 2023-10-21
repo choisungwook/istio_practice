@@ -20,7 +20,7 @@ install-istioctl:
 	@curl -sL https://istio.io/downloadIstio | sh -
 
 install-istio-components:
-	@istioctl install --set profile=demo -f manifests/istio-config.yaml -y
+	@istioctl install --set profile=demo -f manifests/install-istio/istio-config.yaml -y
 	@kubectl label namespace default istio-injection=enabled
 
 define install_kind_linux

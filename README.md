@@ -1,15 +1,35 @@
 # 1. 개요
 * istio 공부내용 정리
 
-# 2. 환경구축
+<br>
+
+# 2. 실습환경 구축
+* kind 클러스터와 istioctl, istio를 설치
+
 ## 2.1 전제조건
 * docker(또는 rancher desktop)가 설치되어 있어야 함 -> kind cluster 구축할 때 docker 사용
 
-## 2.2 환경 생성
+## 2.2 실습환경 생성
 * makefile 스크립트를 이용해서 환경 생성 자동화
-  * 스크립트 실행 내용: kind 명령어 설치 -> kind cluster 생성 -> istioctl
+
 ```bash
 make install
+```
+
+## 2.3 생성 확인
+
+* istio 설치 확인
+
+```bash
+kubectl -n istio-system get pod
+```
+
+* istioctl 설치 확인
+
+```bash
+# istio github 디렉터리 확인
+# istioctl 설치과정에서 istio github을 자동으로 다운로드 함
+ls istio-x.x.x
 
 # istioctl 명령어 경로를 환경변수로 설정
 export PATH="$PATH:/root/git/istio_practice/istio-1.19.0/bin"
@@ -20,27 +40,24 @@ istioctl x precheck
 
 ![](./imgs/install_istio.png)
 
-## 2.3 환경 삭제
+# 3. 실습환경 삭제
 * makefile 스크립트를 이용해서 환경 삭제
-  * 스크립트 실행내용: kind cluster 삭제
+
 ```bash
 make uninstall
 ```
 
-# 3. istio 컴퍼넌트 설치
-* istioctl로 컴퍼넌트 설치
-```bash
-istioctl install --set profile=demo -f manifests/istio-config.yaml -y
-kubectl -n istio-system get po,svc
-```
+# 4. istio 샘플 애플리케이션 배포
 
 * default namespace에 istio inject 설정
 ```bash
 kubectl label namespace default istio-injection=enabled
 ```
 
-# 4. istio 샘플 애플리케이션 배포
+* 샘플 애플리케이션 배포
 ```bash
+# istioctl github repo로 이동
+# istioctl 설치과정에서 istio github을 자동으로 다운로드 함
 cd istio-x.x.x
 
 # 애플리케이션 배포
@@ -64,6 +81,10 @@ curl -s "http://${GATEWAY_URL}/productpage" | grep -o "<title>.*</title>"
 cd istio-x.x.x
 kubectl apply -f samples/addons/
 ```
+
+# 부록. istio 수동 설치 방법
+* [istio 설치 문서 바로가기](./manifests/install-istio/README.md)
+
 
 # 참고자료
 * kind cluster에서 istio 설치: https://medium.com/@s4l1h/how-to-install-kind-and-istio-ingress-controller-3b510834c762
