@@ -2,17 +2,19 @@ kind: Cluster
 apiVersion: kind.x-k8s.io/v1alpha4
 name: istio-practice
 nodes:
-  - role: control-plane
-    kubeadmConfigPatches:
-      - |
-        kind: InitConfiguration
-        nodeRegistration:
-          kubeletExtraArgs:
-            node-labels: "ingress-ready=true"
-    extraPortMappings:
-      - containerPort: 32080
-        hostPort: 80
-        protocol: TCP
-      - containerPort: 32443
-        hostPort: 443
-        protocol: TCP
+- role: control-plane
+  kubeadmConfigPatches:
+  - |
+    kind: InitConfiguration
+    nodeRegistration:
+      kubeletExtraArgs:
+        node-labels: "ingress-ready=true"
+  extraPortMappings:
+  # Istio ingress ingress gateway를 localhost:80으로 접속하기 위해, host 80포트를 Istio ingress ingress gateway NodePort를 매핑
+  # 참고자료: https://kind.sigs.k8s.io/docs/user/configuration/#nodeport-with-port-mappings
+  - containerPort: 32080
+    hostPort: 80
+    protocol: TCP
+  - containerPort: 32443
+    hostPort: 443
+    protocol: TCP
