@@ -1,5 +1,8 @@
 podAnnotations: {}
 
+labels:
+  istio: ingressgateway
+
 service:
   type: NodePort
   ports:
