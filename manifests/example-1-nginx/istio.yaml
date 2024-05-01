@@ -6,12 +6,12 @@ spec:
   selector:
     istio: ingressgateway
   servers:
-    - port:
-        number: 8080
-        name: http
-        protocol: HTTP
-      hosts:
-        - "*"
+  - port:
+      number: 8080
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -19,16 +19,16 @@ metadata:
   name: istio-example-nginx
 spec:
   hosts:
-    - "*"
+  - "example1.com"
   gateways:
-    - istio-example1-nginx
+  - istio-example1-nginx
   http:
-    - match:
-        - uri:
-            prefix: /
-      route:
-        - destination:
-            # kubernetes service name
-            host: istio-example1-nginx
-            port:
-              number: 80
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        # kubernetes service name
+        host: istio-example1-nginx
+        port:
+          number: 80
