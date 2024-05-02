@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: circuit-break-example
+spec:
+  host: "circuit-break-example"
+  trafficPolicy:
+    connectionPool:
+      tcp:
+        maxConnections: 50
+      http:
+        http1MaxPendingRequests: 50
+        maxRequestsPerConnection: 50
+    outlierDetection:
+      consecutive5xxErrors: 7
+      interval: 1m
+      baseEjectionTime: 3m

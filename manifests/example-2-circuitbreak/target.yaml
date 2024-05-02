@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: circuit-break-example
+  labels:
+    app: circuit-break-example
+    service: circuit-break-example
+spec:
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8000
+  selector:
+    app: circuit-break-example
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: circuit-break-example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: circuit-break-example
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: circuit-break-example
+        version: v1
+    spec:
+      containers:
+      - image: choisunguk/fastapi_sleep:v1
+        imagePullPolicy: IfNotPresent
+        name: circuit-break-example
+        ports:
+        - containerPort: 8080
+
