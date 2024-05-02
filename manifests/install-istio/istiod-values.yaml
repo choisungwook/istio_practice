@@ -1,10 +1,11 @@
-# meshConfig:
-#   defaultConfig:
-#     # LIFETIME FOR ISTIO CERTIFICATES
-#     # reference: https://preliminary.istio.io/latest/about/faq/security/#cert-lifetime-config
-#     proxyMetadata:
-#       SECRET_TTL: 1m
+meshConfig:
+  accessLogFile: /dev/stdout
+# defaultConfig:
+#   # LIFETIME FOR ISTIO CERTIFICATES
+#   # reference: https://preliminary.istio.io/latest/about/faq/security/#cert-lifetime-config
+#   proxyMetadata:
+#     SECRET_TTL: 1m
 
-global:
-  logging:
-    level: "default:debug,ads:debug,gateway:debug,pkica:debug,pkira:debug,rootcertrotator:debug,secretcontroller:debug,security:debug,serverca:debug,ca:debug"
+# global:
+#   logging:
+#     level: "default:debug,ads:debug,gateway:debug,pkica:debug,pkira:debug,rootcertrotator:debug,secretcontroller:debug,security:debug,serverca:debug,ca:debug"
