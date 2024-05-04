@@ -9,7 +9,7 @@
 ```sh
 helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 helm repo update
-helm upgrade --install -n default -f metrics-server-values.yaml metrics-server metrics-server/metrics-server
+helm upgrade --install -n kube-system -f metrics-server-values.yaml metrics-server metrics-server/metrics-server
 ```
 
 # prometheus 설치
@@ -28,6 +28,13 @@ $ kubectl get pod -n istio-system
 NAME                             READY   STATUS              RESTARTS   AGE
 prometheus-db8b4588f-mtt6n       0/2     ContainerCreating   0          11s
 ```
+
+* 프로메테우스 접속 방법
+
+```sh
+kubectl port-forward service/prometheus -n istio-system 9090:9090
+```
+
 
 # 참고자료
 * https://istio.io/latest/docs/ops/integrations/prometheus/
