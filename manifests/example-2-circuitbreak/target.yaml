@@ -22,17 +22,27 @@ spec:
   selector:
     matchLabels:
       app: circuit-break-example
-      version: v1
   template:
     metadata:
       labels:
         app: circuit-break-example
-        version: v1
     spec:
       containers:
-      - image: choisunguk/fastapi_sleep:v1
+      - image: choisunguk/fastapi_sleep:v2
         imagePullPolicy: IfNotPresent
         name: circuit-break-example
         ports:
-        - containerPort: 8080
-
+        - containerPort: 8000
+        resources:
+          limits:
+            cpu: 200m
+            memory: 256Mi
+          requests:
+            cpu: 200m
+            memory: 256Mi
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8000
+          initialDelaySeconds: 10
+          periodSeconds: 10
