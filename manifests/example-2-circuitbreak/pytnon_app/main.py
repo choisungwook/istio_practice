@@ -1,13 +1,15 @@
 from fastapi import FastAPI
-import asyncio
+import os
+import time
 
 app = FastAPI()
 
 @app.get("/sleep")
-async def sleep():
-  await asyncio.sleep(2)
+def sleep():
+  sleep_time = int(os.environ.get("SLEEPTIME", 2))
+  time.sleep(sleep_time)
   return {"message": "ok"}
 
 @app.get("/ping")
-async def ping():
+def ping():
   return {"message": "ok"}

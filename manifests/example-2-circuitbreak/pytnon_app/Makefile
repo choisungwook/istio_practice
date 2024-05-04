@@ -1,5 +1,5 @@
 IMAGE_NAME=choisunguk/fastapi_sleep
-IMAGE_TAG=v2
+IMAGE_TAG=v4
 
 create-builder:
 	docker buildx create --name mybuilder --use
