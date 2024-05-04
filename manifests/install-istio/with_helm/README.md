@@ -58,5 +58,9 @@ helm uninstall -n istio-system istiod --wait
 helm uninstall -n istio-system istio-base --wait
 ```
 
+# 5. 다음 단계
+
+* [모니터링 도구 설치](../monitoring)
+
 # 참고자료
 * istio 공식문서: https://istio.io/latest/docs/setup/install/helm/

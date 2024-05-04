@@ -3,4 +3,5 @@
 
 # 목차
 * [istio 설치 config](./install-istio/README.md)
-* [nginx pod와 istio 설정](./example-1-nginx/)
+* [hello world - nginx pod와 istio 설정](./example-1-nginx/)
+* [circuit break 예제](./example-2-circuitbreak/)
