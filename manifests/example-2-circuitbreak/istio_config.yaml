@@ -7,7 +7,7 @@ spec:
     istio: ingressgateway
   servers:
   - port:
-      number: 8080
+      number: 80
       name: http
       protocol: HTTP
     hosts:
@@ -16,7 +16,7 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: istio-example-nginx
+  name: circuit-break-example
 spec:
   hosts:
   - "example2.com"
