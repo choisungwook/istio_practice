@@ -28,21 +28,25 @@ spec:
         app: circuit-break-example
     spec:
       containers:
-      - image: choisunguk/fastapi_sleep:v2
+      - image: choisunguk/fastapi_sleep:v4
         imagePullPolicy: IfNotPresent
         name: circuit-break-example
+        env:
+        - name: SLEEP_TIME
+          value: "5"
         ports:
         - containerPort: 8000
         resources:
           limits:
-            cpu: 200m
+            cpu: 100m
             memory: 256Mi
           requests:
-            cpu: 200m
+            cpu: 100m
             memory: 256Mi
         livenessProbe:
           httpGet:
             path: /ping
             port: 8000
           initialDelaySeconds: 10
-          periodSeconds: 10
+          periodSeconds: 3
+          failureThreshold: 2
