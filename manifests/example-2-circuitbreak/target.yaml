@@ -32,7 +32,7 @@ spec:
         imagePullPolicy: IfNotPresent
         name: circuit-break-example
         env:
-        - name: SLEEP_TIME
+        - name: SLEEPTIME
           value: "5"
         ports:
         - containerPort: 8000
